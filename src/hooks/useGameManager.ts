@@ -18,7 +18,7 @@ async function imageUrlToBase64(url: string): Promise<string> {
 }
 const BASE_EDITIONS = [
   {
-    id: "legacy_evolved", //neo: yes. we're not changing the ID. that will break user data.
+    id: "legacy_evolved",
     name: "neoLegacy",
     desc: "Backporting newer title updates and Minigames back to LCE",
     url: "https://github.com/pieeebot/neoLegacy/releases/download/v1.0.0b/neoLegacyWindows64.zip",
@@ -44,7 +44,7 @@ const BASE_EDITIONS = [
     logo: "/images/360_revived.png"
   },
   {
-    id: "legacy_nether_fork", //kay: not changing this one also
+    id: "legacy_nether_fork",
     name: "Hellish Ends",
     desc: "QoL, Random additions, and Nether/End dimensions overhaul (Modded build !)",
     url: "https://github.com/deadvoxelx/HellishEnds/releases/download/nightly/LCEWindows64.zip",
@@ -86,10 +86,28 @@ export function useGameManager({
   const [error, setError] = useState<string | null>(null);
   const [gameUpdateMessage, setGameUpdateMessage] = useState<string | null>(null);
   const [steamSuccessMessage, setSteamSuccessMessage] = useState<string | null>(null);
+  const [dynamicUrls, setDynamicUrls] = useState<Record<string, string>>({});
+  useEffect(() => {
+    async function fetchLatestReleases() {
+      try {
+        const response = await fetch("https://api.github.com/repos/pieeebot/neoLegacy/releases/latest");
+        if (response.ok) {
+          const data = await response.json();
+          const asset = data.assets.find((a: any) => a.name === "neoLegacyWindows64.zip");
+          if (asset) {
+            setDynamicUrls(prev => ({ ...prev, legacy_evolved: asset.browser_download_url }));
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch latest releases:", e);
+      }
+    }
+    fetchLatestReleases();
+  }, []);
 
   const editions = useMemo(
-    () => [...BASE_EDITIONS, ...customEditions],
-    [customEditions],
+    () => [...BASE_EDITIONS.map(e => ({ ...e, url: dynamicUrls[e.id] || e.url })), ...customEditions],
+    [customEditions, dynamicUrls],
   );
 
   const checkInstalls = useCallback(async () => {
@@ -103,7 +121,6 @@ export function useGameManager({
   }, [editions]);
 
   const [updatesAvailable, setUpdatesAvailable] = useState<Record<string, boolean>>({});
-
   const checkForGameUpdates = useCallback(async () => {
     const checks = await Promise.all(
       editions.map(async (edition) => {

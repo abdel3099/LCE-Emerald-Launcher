@@ -178,15 +178,20 @@ export function useGameManager({
     if (available.length <= 1) return;
     setSelectedBranches(prev => {
       const current = prev[editionId] || available[0];
-      const currentIndex = available.indexOf(current);
-      const nextIndex = (currentIndex + 1) % available.length;
-      const nextBranch = available[nextIndex];
-      const oldInstanceId = current === "Stable" ? editionId : `${editionId}_${current}`;
-      const newInstanceId = nextBranch === "Stable" ? editionId : `${editionId}_${nextBranch}`;
+      let currentIndex = available.indexOf(current);
+      let nextIndex = currentIndex;
+      let nextBranch = current;
+      do {
+        nextIndex = (nextIndex + 1) % available.length;
+        nextBranch = available[nextIndex];
+      } while (nextBranch.startsWith("v") && nextIndex !== currentIndex);
+      const oldInstanceId =
+        current === "Stable" ? editionId : `${editionId}_${current}`;
+      const newInstanceId =
+        nextBranch === "Stable" ? editionId : `${editionId}_${nextBranch}`;
       if (profile === oldInstanceId) {
         setProfile(newInstanceId);
       }
-
       return { ...prev, [editionId]: nextBranch };
     });
   }, [branches, profile, setProfile]);

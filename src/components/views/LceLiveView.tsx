@@ -806,12 +806,20 @@ const LceLiveView = memo(function LceLiveView() {
           style={{
             backgroundImage: "url('/images/background.png')",
             backgroundSize: "100% auto",
-            backgroundRepeat: "repeat",
+            backgroundRepeat: "no-repeat",
             backgroundPosition: "top",
             imageRendering: "pixelated",
           }}
         >
           {renderContent()}
+        </div>
+        <div className="flex justify-center pt-4 pb-2">
+          <img
+            src="/images/lcelive.png"
+            alt="LCELive"
+            className="h-5 opacity-70 cursor-pointer hover:opacity-100 transition-opacity"
+            onClick={() => TauriService.openUrl('https://lcelive.co.uk')}
+          />
         </div>
       </div>
 

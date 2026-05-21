@@ -681,7 +681,8 @@ const WorkshopView = memo(function WorkshopView() {
                     <img
                       src="/images/bytebukkit.png"
                       alt="ByteBukkit"
-                      className="h-5 opacity-70"
+                      className="h-5 opacity-70 cursor-pointer hover:opacity-100 transition-opacity"
+                      onClick={() => TauriService.openUrl('https://bytebukkit.github.io')}
                     />
                   </div>
                 )}

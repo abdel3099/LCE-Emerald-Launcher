@@ -202,7 +202,7 @@ const WorkshopView = memo(function WorkshopView() {
             thumbnail: `${SERVERS_BASE}${s.server_icon}`,
             version: s.console_version,
             server_address: s.server_address,
-            server_homepage: s.server_homepage,
+            server_discord: s.server_discord ?? "",
             server_type: s.server_type,
           })),
         );
@@ -682,7 +682,9 @@ const WorkshopView = memo(function WorkshopView() {
                       src="/images/bytebukkit.png"
                       alt="ByteBukkit"
                       className="h-5 opacity-70 cursor-pointer hover:opacity-100 transition-opacity"
-                      onClick={() => TauriService.openUrl('https://bytebukkit.github.io')}
+                      onClick={() =>
+                        TauriService.openUrl("https://bytebukkit.github.io")
+                      }
                     />
                   </div>
                 )}
@@ -1171,20 +1173,20 @@ function PackageModal({
                           {pkg.author}
                         </span>
                       </div>
-                      {pkg.server_homepage && (
+                      {pkg.server_discord && (
                         <div className="flex justify-between text-xs">
                           <span className="text-[#888] mc-text-shadow">
-                            Homepage:
+                            Discord Server:
                           </span>
                           <a
-                            href={pkg.server_homepage}
+                            href={pkg.server_discord}
                             onClick={(e) => {
                               e.preventDefault();
-                              TauriService.openUrl(pkg.server_homepage!);
+                              TauriService.openUrl(pkg.server_discord!);
                             }}
                             className="text-[#55FF55] mc-text-shadow truncate ml-2 underline cursor-pointer hover:text-[#FFFF55]"
                           >
-                            {pkg.server_homepage}
+                            {pkg.server_discord}
                           </a>
                         </div>
                       )}

@@ -18,8 +18,6 @@ interface UIContextType {
   isUiHidden: boolean;
   setIsUiHidden: (hidden: boolean) => void;
   isWindowVisible: boolean;
-  showCredits: boolean;
-  setShowCredits: (show: boolean) => void;
   focusSection: "menu" | "skin";
   setFocusSection: (section: "menu" | "skin") => void;
   onNavigateToSkin: () => void;
@@ -40,7 +38,6 @@ export function LauncherProvider({ children }: { children: React.ReactNode }) {
   const [activeView, setActiveView] = useState("main");
   const [isUiHidden, setIsUiHidden] = useState(false);
   const [isWindowVisible, setIsWindowVisible] = useState(true);
-  const [showCredits, setShowCredits] = useState(false);
   const [focusSection, setFocusSection] = useState<"menu" | "skin">("menu");
 
   const { updateMessage, updateUrl, clearUpdateMessage } = useUpdateCheck();
@@ -191,10 +188,10 @@ export function LauncherProvider({ children }: { children: React.ReactNode }) {
     activeView, setActiveView, showIntro, setShowIntro,
     logoAnimDone, setLogoAnimDone, isUiHidden, setIsUiHidden,
     isWindowVisible,
-    showCredits, setShowCredits, focusSection, setFocusSection,
+    focusSection, setFocusSection,
     onNavigateToSkin, onNavigateToMenu, connected,
     updateMessage, updateUrl, clearUpdateMessage
-  }), [activeView, showIntro, logoAnimDone, isUiHidden, isWindowVisible, showCredits, focusSection, onNavigateToSkin, onNavigateToMenu, connected, updateMessage, updateUrl, clearUpdateMessage]);
+  }), [activeView, showIntro, logoAnimDone, isUiHidden, isWindowVisible, focusSection, onNavigateToSkin, onNavigateToMenu, connected, updateMessage, updateUrl, clearUpdateMessage]);
 
   return (
     <UIContext.Provider value={uiValue}>

@@ -9,7 +9,7 @@ import {
 import type { Edition } from "../../types/edition";
 
 const HomeView = memo(function HomeView() {
-  const { setActiveView, setShowCredits, focusSection, onNavigateToSkin } =
+  const { setActiveView, focusSection, onNavigateToSkin } =
     useUI();
   const { profile, legacyMode } = useConfig();
   const { playPressSound, playSfx } = useAudio();
@@ -208,12 +208,12 @@ const HomeView = memo(function HomeView() {
             onClick={() => {
               if (isFocusedSection) {
                 playSfx("orb.ogg");
-                setShowCredits(true);
+                setActiveView("credits");
               }
             }}
             className={`text-white hover:text-[#FFFF55] text-xl mc-text-shadow tracking-widest transition-colors mt-1 bg-transparent border-none outline-none ${!isFocusedSection ? "pointer-events-none" : ""}`}
           >
-            EMERALD TEAM
+            CREDITS
           </button>
         </div>
       )}

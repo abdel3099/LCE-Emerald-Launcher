@@ -17,8 +17,8 @@ import OptionsEditorView from "../components/views/OptionsEditorView";
 import ScreenshotsView from "../components/views/ScreenshotsView";
 import SwfView from "../components/views/SwfView";
 import LceLiveView from "../components/views/LceLiveView";
+import CreditsView from "../components/views/CreditsView";
 import SkinViewer from "../components/common/SkinViewer";
-import TeamModal from "../components/modals/TeamModal";
 import PanoramaBackground from "../components/common/PanoramaBackground";
 import { ClickParticles } from "../components/common/ClickParticles";
 import { CinematicIntro } from "../components/common/CinematicIntro";
@@ -44,8 +44,6 @@ export default function App() {
     setActiveView,
     isUiHidden,
     setIsUiHidden,
-    showCredits,
-    setShowCredits,
     focusSection,
     onNavigateToMenu,
     updateMessage,
@@ -163,17 +161,6 @@ export default function App() {
         </div>
 
         {config.vfxEnabled && <ClickParticles />}
-
-        <AnimatePresence>
-          {showCredits && (
-            <TeamModal
-              isOpen={showCredits}
-              onClose={() => setShowCredits(false)}
-              playPressSound={audio.playPressSound}
-              playSfx={audio.playSfx}
-            />
-          )}
-        </AnimatePresence>
 
         <DownloadOverlay
           downloadProgress={game.downloadProgress}
@@ -309,31 +296,35 @@ export default function App() {
 
           <div className="shrink-0 flex justify-center py-4 relative w-full pt-4">
             <div className="relative w-full max-w-135 flex justify-center">
-              <motion.img
-                layoutId="mainLogo"
-                src={titleImage}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 25,
-                }}
-                className="w-full drop-shadow-[0_8px_6px_rgba(0,0,0,0.8)] pointer-events-none"
-                style={{ imageRendering: "pixelated" }}
-              />
-              <motion.div
-                {...uiFade}
-                className="absolute bottom-[20%] right-[5%] w-0 h-0 flex items-center justify-center"
-              >
-                <div
-                  onClick={audio.cycleSplash}
-                  className="mc-splash text-[#FFFF55] text-[28px] z-100 cursor-pointer whitespace-nowrap"
-                  style={{ textShadow: "2px 2px 0px #3F3F00" }}
+              {activeView !== "credits" && (
+                <motion.img
+                  layoutId="mainLogo"
+                  src={titleImage}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25,
+                  }}
+                  className="w-full drop-shadow-[0_8px_6px_rgba(0,0,0,0.8)] pointer-events-none"
+                  style={{ imageRendering: "pixelated" }}
+                />
+              )}
+              {activeView !== "credits" && (
+                <motion.div
+                  {...uiFade}
+                  className="absolute bottom-[20%] right-[5%] w-0 h-0 flex items-center justify-center"
                 >
-                  {audio.splashIndex === -1
-                    ? `Welcome ${config.username}!`
-                    : audio.splashes[audio.splashIndex]}
-                </div>
-              </motion.div>
+                  <div
+                    onClick={audio.cycleSplash}
+                    className="mc-splash text-[#FFFF55] text-[28px] z-100 cursor-pointer whitespace-nowrap"
+                    style={{ textShadow: "2px 2px 0px #3F3F00" }}
+                  >
+                    {audio.splashIndex === -1
+                      ? `Welcome ${config.username}!`
+                      : audio.splashes[audio.splashIndex]}
+                  </div>
+                </motion.div>
+              )}
               {activeView === "main" && hasAnyInstall && titleImage === "/images/MenuTitle.png" && (
                 <motion.div
                   {...uiFade}
@@ -408,6 +399,9 @@ export default function App() {
                   {activeView === "skins" && <SkinsView key="skins-view" />}
                   {activeView === "screenshots" && (
                     <ScreenshotsView key="screenshots-view" />
+                  )}
+                  {activeView === "credits" && (
+                    <CreditsView key="credits-view" />
                   )}
                 </AnimatePresence>
               </div>

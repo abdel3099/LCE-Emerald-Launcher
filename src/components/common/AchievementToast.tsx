@@ -98,12 +98,9 @@ export function AchievementToast({
           <div
             className="flex items-center gap-4 p-4 min-w-[300px] max-w-[450px]"
             style={{
-              backgroundColor: "#212121",
-              border: "4px solid",
-              borderTopColor: "#7F7F7F",
-              borderLeftColor: "#7F7F7F",
-              borderBottomColor: "#3F3F3F",
-              borderRightColor: "#3F3F3F",
+              backgroundImage: "url('/images/notification.png')",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
               imageRendering: "pixelated",
             }}
           >

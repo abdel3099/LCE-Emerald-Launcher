@@ -130,13 +130,7 @@ export default function CustomTUModal({
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 outline-none border-none">
       <div
-        className="relative w-[400px] p-6 flex flex-col items-center"
-        style={{
-          backgroundImage: "url('/images/background.png')",
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          imageRendering: "pixelated",
-        }}
+        className="relative w-[400px] p-6 flex flex-col items-center mc-options-bg"
       >
         <h2 className="text-xl text-black mc-text-shadow mb-4 text-center">
           {editingEdition ? "Edit Custom TU" : "Import Custom TU"}

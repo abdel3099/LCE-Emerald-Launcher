@@ -262,13 +262,7 @@ const VersionsView = memo(function VersionsView() {
       </h2>
 
       <div
-        className="w-full min-w-[480px] p-6 mb-4"
-        style={{
-          backgroundImage: "url('/images/background.png')",
-          backgroundSize: "100% 100%",
-          backgroundRepeat: "no-repeat",
-          imageRendering: "pixelated",
-        }}
+        className="w-full min-w-[480px] p-6 mb-4 mc-options-bg"
       >
         <div
           ref={listRef}

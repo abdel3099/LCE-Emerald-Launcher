@@ -767,14 +767,7 @@ const LceLiveView = memo(function LceLiveView() {
             {tabs.map((t) => (
               <button
                 key={t}
-                className={`flex-1 font-bold text-xl outline-none uppercase transition-all duration-200 ease-in-out ${currentTab === t ? "text-[#2a2a2a] z-20 pb-6 pt-5 text-2xl drop-shadow-[5px_-5px_15px_rgba(0,0,0,0.3)] rounded-t border-4 border-[#222] border-b-0" : "text-[#555] mt-2 py-4 hover:bg-black/30 bg-black/10 hover:text-[#222] border-4 border-transparent border-b-0"}`}
-                style={{
-                  backgroundImage: "url('/images/background.png')",
-                  backgroundSize: "100% 100%",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "bottom",
-                  imageRendering: "pixelated",
-                }}
+                className={`flex-1 font-bold text-xl outline-none uppercase transition-all duration-200 ease-in-out mc-lce-tab-bg ${currentTab === t ? "active" : ""}`}
                 onClick={() => {
                   setCurrentTab(t);
                   setFocusIndex(0);

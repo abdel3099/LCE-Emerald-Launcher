@@ -245,12 +245,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
 
                   {currentStep === 0 && (
                     <div
-                      className="p-5 flex flex-col gap-4"
-                      style={{
-                        backgroundImage: "url('/images/background.png')",
-                        backgroundSize: "100% 100%",
-                        imageRendering: "pixelated",
-                      }}
+                      className="p-5 flex flex-col gap-4 mc-options-bg"
                     >
                       <p className="text-white/70 text-sm tracking-widest text-center uppercase">
                         Let's configure your launcher
@@ -278,12 +273,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
 
                   {currentStep === 1 && isMac && (
                     <div
-                      className="p-5 flex flex-col gap-4"
-                      style={{
-                        backgroundImage: "url('/images/background.png')",
-                        backgroundSize: "100% 100%",
-                        imageRendering: "pixelated",
-                      }}
+                      className="p-5 flex flex-col gap-4 mc-options-bg"
                     >
                       <p className="text-white/70 text-xs tracking-widest text-center uppercase">
                         {runtimeAlreadyInstalled
@@ -342,12 +332,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
 
                   {currentStep === 1 && isLinux && (
                     <div
-                      className="p-5 flex flex-col gap-3"
-                      style={{
-                        backgroundImage: "url('/images/background.png')",
-                        backgroundSize: "100% 100%",
-                        imageRendering: "pixelated",
-                      }}
+                      className="p-5 flex flex-col gap-3 mc-options-bg"
                     >
                       <p className="text-white/70 text-xs tracking-widest text-center uppercase">
                         Choose your preferred compatibility layer
@@ -382,12 +367,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
 
                   {currentStep === 1 && !isMac && !isLinux && (
                     <div
-                      className="p-5 flex flex-col gap-4"
-                      style={{
-                        backgroundImage: "url('/images/background.png')",
-                        backgroundSize: "100% 100%",
-                        imageRendering: "pixelated",
-                      }}
+                      className="p-5 flex flex-col gap-4 mc-options-bg"
                     >
                       <p className="text-white/70 text-xs tracking-widest text-center uppercase">
                         Everything is ready to go!
@@ -404,12 +384,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
 
                   {currentStep === 2 && (
                     <div
-                      className="p-5 flex flex-col gap-2"
-                      style={{
-                        backgroundImage: "url('/images/background.png')",
-                        backgroundSize: "100% 100%",
-                        imageRendering: "pixelated",
-                      }}
+                      className="p-5 flex flex-col gap-2 mc-options-bg"
                     >
                       <p className="text-white/70 text-xs tracking-widest text-center uppercase mb-2">
                         Choose your preferred launcher settings
@@ -474,12 +449,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
 
                   {currentStep === 3 && (
                     <div
-                      className="p-5 flex flex-col gap-3"
-                      style={{
-                        backgroundImage: "url('/images/background.png')",
-                        backgroundSize: "100% 100%",
-                        imageRendering: "pixelated",
-                      }}
+                      className="p-5 flex flex-col gap-3 mc-options-bg"
                     >
                       <p className="text-white/70 text-xs tracking-widest text-center uppercase">
                         Emerald Launcher is now configured and ready to use!

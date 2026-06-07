@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TauriService, Runner } from "../../services/TauriService";
 import { usePlatform } from "../../hooks/usePlatform";
-import { useConfig, useAudio, useGame } from "../../context/LauncherContext";
+import { useConfig, useAudio } from "../../context/LauncherContext";
 interface SetupViewProps {
   onComplete: () => void;
 }
@@ -12,7 +12,6 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
   const {
     username, setUsername,
     setHasCompletedSetup,
-    profile,
     setVfxEnabled: setConfigVfx,
     setRpcEnabled: setConfigRpc,
     setLinuxRunner,
@@ -22,8 +21,7 @@ const SetupView: React.FC<SetupViewProps> = ({ onComplete }) => {
     animationsEnabled,
   } = useConfig();
   const { playPressSound, playSfx } = useAudio();
-  const { editions } = useGame();
-  const titleImage = editions.find(e => e.id === profile)?.titleImage || "/images/MenuTitle.png";
+  const titleImage = "/images/emerald_launcher.png";
   const [currentStep, setCurrentStep] = useState(0);
   const [focusIndex, setFocusIndex] = useState(0);
   const [tempUsername, setTempUsername] = useState(username);

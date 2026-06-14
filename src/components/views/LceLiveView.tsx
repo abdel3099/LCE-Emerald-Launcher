@@ -32,7 +32,9 @@ const LceLiveView = memo(function LceLiveView() {
   const [incomingReqs, setIncomingReqs] = useState<FriendRequest[]>([]);
   const [outgoingReqs, setOutgoingReqs] = useState<FriendRequest[]>([]);
   const [invites, setInvites] = useState<GameInvite[]>([]);
-  const [linkData, setLinkData] = useState<DeviceLinkStartResponse | null>(null);
+  const [linkData, setLinkData] = useState<DeviceLinkStartResponse | null>(
+    null,
+  );
   const [linkError, setLinkError] = useState<string | null>(null);
   const [isHosting, setIsHosting] = useState(false);
   const [hostStatus, setHostStatus] = useState("");
@@ -176,7 +178,12 @@ const LceLiveView = memo(function LceLiveView() {
       setHostStatus(`Hosting at ${endpoint.ip}:25565`);
       setInvitedFriends(new Set());
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : typeof e === "string" ? e : "Unknown error";
+      const msg =
+        e instanceof Error
+          ? e.message
+          : typeof e === "string"
+            ? e
+            : "Unknown error";
       setErrorModal("STUN discovery failed: " + msg);
       setHostStatus("");
     } finally {
@@ -240,7 +247,8 @@ const LceLiveView = memo(function LceLiveView() {
         .then(() => setHostStatus("Relay active"))
         .catch((relayErr: unknown) => {
           const relayMsg =
-            relayErr instanceof Error ? relayErr.message
+            relayErr instanceof Error
+              ? relayErr.message
               : typeof relayErr === "string"
                 ? relayErr
                 : "Unknown error";
@@ -248,7 +256,12 @@ const LceLiveView = memo(function LceLiveView() {
           setHostStatus("Relay disconnected");
         });
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : typeof e === "string" ? e : "Unknown error";
+      const msg =
+        e instanceof Error
+          ? e.message
+          : typeof e === "string"
+            ? e
+            : "Unknown error";
       setErrorModal("Failed to send invite: " + msg);
     }
   };
@@ -379,7 +392,11 @@ const LceLiveView = memo(function LceLiveView() {
     showHostMethodPicker,
   ]);
 
-  const tabs: ("friends" | "requests" | "invites")[] = ["friends", "requests", "invites"];
+  const tabs: ("friends" | "requests" | "invites")[] = [
+    "friends",
+    "requests",
+    "invites",
+  ];
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (errorModal) {
@@ -564,7 +581,7 @@ const LceLiveView = memo(function LceLiveView() {
                   data-index={idx}
                   onMouseEnter={() => setFocusIndex(idx)}
                   onClick={btn.onClick}
-                  className={`flex-1 h-12 flex items-center justify-center text-xl font-bold uppercase tracking-widest outline-none border-none ${isFocused ? "text-[#FFFF55] mc-text-shadow z-10 relative drop-shadow-md" : "text-white mc-text-shadow hover:text-gray-200"}`}
+                  className={`flex-1 h-12 flex items-center justify-center text-xl font-bold uppercase tracking-widest outline-none border-none transition-all ${isFocused ? "text-[#FFFF55] mc-text-shadow scale-[1.02] z-10 relative drop-shadow-md" : "text-white mc-text-shadow hover:text-gray-200"}`}
                   style={{
                     backgroundImage: isFocused
                       ? "url('/images/button_highlighted.png')"
@@ -577,11 +594,6 @@ const LceLiveView = memo(function LceLiveView() {
                 </button>
               );
             })}
-          </div>
-        )}
-        {hostStatus && (
-          <div className="text-center text-sm text-[#FFFF55] mc-text-shadow py-1 tracking-wider">
-            {hostStatus}
           </div>
         )}
 
@@ -747,7 +759,6 @@ const LceLiveView = memo(function LceLiveView() {
       </div>
     );
   };
-
   return (
     <motion.div
       ref={containerRef}
@@ -767,7 +778,14 @@ const LceLiveView = memo(function LceLiveView() {
             {tabs.map((t) => (
               <button
                 key={t}
-                className={`flex-1 font-bold text-xl outline-none uppercase transition-all duration-200 ease-in-out mc-lce-tab-bg ${currentTab === t ? "active" : ""}`}
+                className={`flex-1 font-bold text-xl outline-none uppercase transition-all duration-200 ease-in-out ${currentTab === t ? "text-[#2a2a2a] z-20 pb-6 pt-5 text-2xl drop-shadow-[5px_-5px_15px_rgba(0,0,0,0.3)] rounded-t border-4 border-[#222] border-b-0" : "text-[#555] mt-2 py-4 hover:bg-black/30 bg-black/10 hover:text-[#222] border-4 border-transparent border-b-0"}`}
+                style={{
+                  backgroundImage: "url('/images/background.png')",
+                  backgroundSize: "100% 100%",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "bottom",
+                  imageRendering: "pixelated",
+                }}
                 onClick={() => {
                   setCurrentTab(t);
                   setFocusIndex(0);
@@ -796,7 +814,16 @@ const LceLiveView = memo(function LceLiveView() {
           </div>
         )}
 
-        <div className="flex-1 flex flex-col p-8 z-10 relative overflow-hidden mc-options-bg">
+        <div
+          className="flex-1 flex flex-col p-8 z-10 relative overflow-hidden rounded-b shadow-[0_0_30px_rgba(0,0,0,0.6)] border-4 border-[#222] border-t-0"
+          style={{
+            backgroundImage: "url('/images/background.png')",
+            backgroundSize: "100% auto",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top",
+            imageRendering: "pixelated",
+          }}
+        >
           {renderContent()}
         </div>
         <div className="flex justify-center pt-4 pb-2">
@@ -804,7 +831,7 @@ const LceLiveView = memo(function LceLiveView() {
             src="/images/lcelive.png"
             alt="LCELive"
             className="h-5 opacity-70 cursor-pointer"
-            onClick={() => TauriService.openUrl('https://lcelive.co.uk')}
+            onClick={() => TauriService.openUrl("https://lcelive.co.uk")}
           />
         </div>
       </div>
